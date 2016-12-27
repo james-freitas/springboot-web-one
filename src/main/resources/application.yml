@@ -3,3 +3,4 @@ spring:
     cache: false
   mvc:
     locale: es
+
