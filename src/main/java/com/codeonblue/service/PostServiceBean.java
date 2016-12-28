@@ -45,12 +45,10 @@ public class PostServiceBean implements PostService{
     }
 
     static {
-        Post g1 = new Post();
-        g1.setDescription("Hello World!");
+        Post g1 = new Post("Hello World!");
         save(g1);
 
-        Post g2 = new Post();
-        g2.setDescription("Hola Mundo!");
+        Post g2 = new Post("Hola Mundo!");
         save(g2);
     }
 
