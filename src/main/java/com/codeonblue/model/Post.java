@@ -1,10 +1,10 @@
 package com.codeonblue.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import org.springframework.data.annotation.CreatedDate;
+
+import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 public class Post {
@@ -13,8 +13,34 @@ public class Post {
     @GeneratedValue
     private Long id;
     private String title;
+
+    @Column(columnDefinition = "TEXT")
     private String body;
-    private LocalDate postedOn;
+
+    public String getTeaser() {
+        return teaser;
+    }
+
+    public void setTeaser(String teaser) {
+        this.teaser = teaser;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    @Column(columnDefinition = "TEXT")
+    private String teaser;
+
+    private String slug;
+
+    @CreatedDate
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime postedOn;
 
     @ManyToOne
     private Author author;
@@ -52,11 +78,11 @@ public class Post {
         this.body = body;
     }
 
-    public LocalDate getPostedOn() {
+    public LocalDateTime getPostedOn() {
         return postedOn;
     }
 
-    public void setPostedOn(LocalDate postedOn) {
+    public void setPostedOn(LocalDateTime postedOn) {
         this.postedOn = postedOn;
     }
 
@@ -68,30 +94,6 @@ public class Post {
         this.author = author;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Post post = (Post) o;
-
-        if (id != null ? !id.equals(post.id) : post.id != null) return false;
-        if (title != null ? !title.equals(post.title) : post.title != null) return false;
-        if (body != null ? !body.equals(post.body) : post.body != null) return false;
-        if (postedOn != null ? !postedOn.equals(post.postedOn) : post.postedOn != null) return false;
-        return author != null ? author.equals(post.author) : post.author == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (body != null ? body.hashCode() : 0);
-        result = 31 * result + (postedOn != null ? postedOn.hashCode() : 0);
-        result = 31 * result + (author != null ? author.hashCode() : 0);
-        return result;
-    }
 
     @Override
     public String toString() {
@@ -99,6 +101,8 @@ public class Post {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
+                ", teaser='" + teaser + '\'' +
+                ", slug='" + slug + '\'' +
                 ", postedOn=" + postedOn +
                 ", author=" + author +
                 '}';

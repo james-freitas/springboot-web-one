@@ -6,13 +6,7 @@ import java.util.Collection;
 
 public interface PostService {
 
-    Collection<Post> findAll();
+    Post getLatestPost();
 
-    Post findOne(Long id);
-
-    Post create(Post post);
-
-    Post update(Post post);
-
-    void delete(Long id);
+    Post findOne(String slug);
 }

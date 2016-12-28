@@ -15,12 +15,4 @@ public class SpringBootWebAppOneApplication {
 		SpringApplication.run(SpringBootWebAppOneApplication.class, args);
 	}
 
-    @Bean
-    public EmbeddedServletContainerCustomizer containerCustomizer() {
-        return ( container -> {
-            ErrorPage custom404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/404.html");
-            container.addErrorPages(custom404Page);
-        });
-    }
-
 }

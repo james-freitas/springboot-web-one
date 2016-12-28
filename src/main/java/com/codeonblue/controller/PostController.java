@@ -28,13 +28,13 @@ public class PostController {
 
     @RequestMapping("/")
     public String list(Model model){
-        model.addAttribute("posts", postService.findAll());
-        return "blog/posts";
+        model.addAttribute("post", postService.getLatestPost());
+        return "blog/index";
     }
 
     // Handling Specific Exceptions
     @RequestMapping("/get/{slug}")
-    public String getPost(@PathVariable(value = "slug") Long slug) throws PostNotFoundException {
+    public String getPost(@PathVariable(value = "slug") String slug) throws PostNotFoundException {
         Post post = postService.findOne(slug);
         if (post == null) throw new PostNotFoundException("We couldn't find the post with slug: " + slug);
         return "blog/post";
