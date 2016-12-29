@@ -3,7 +3,6 @@ package com.codeonblue.model;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -16,22 +15,6 @@ public class Post {
 
     @Column(columnDefinition = "TEXT")
     private String body;
-
-    public String getTeaser() {
-        return teaser;
-    }
-
-    public void setTeaser(String teaser) {
-        this.teaser = teaser;
-    }
-
-    public String getSlug() {
-        return slug;
-    }
-
-    public void setSlug(String slug) {
-        this.slug = slug;
-    }
 
     @Column(columnDefinition = "TEXT")
     private String teaser;
@@ -94,6 +77,21 @@ public class Post {
         this.author = author;
     }
 
+    public String getTeaser() {
+        return teaser;
+    }
+
+    public void setTeaser(String teaser) {
+        this.teaser = teaser;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
 
     @Override
     public String toString() {

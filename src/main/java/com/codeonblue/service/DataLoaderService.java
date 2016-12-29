@@ -1,14 +1,11 @@
 package com.codeonblue.service;
 
-import com.codeonblue.model.Author;
-import com.codeonblue.model.Post;
 import com.codeonblue.repository.AuthorRepository;
 import com.codeonblue.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.time.LocalDateTime;
 
 @Service
 public class DataLoaderService {
@@ -24,7 +21,7 @@ public class DataLoaderService {
 
     @PostConstruct
     private void loadData() {
-        Author jd = new Author("James", "Freitas");
+/*        Author jd = new Author("James", "Freitas");
         jd.setEmail("jamesfrj@yahoo.com.br");
         authorRepository.save(jd);
 
@@ -42,6 +39,6 @@ public class DataLoaderService {
                 " proident, sunt in culpa qui officia deserunt mollit anim id est laborum");
         firstPost.setTeaser("Teaser from post one");
         firstPost.setAuthor(jd);
-        postRepository.save(firstPost);
+        postRepository.save(firstPost);*/
     }
 }

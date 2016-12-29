@@ -7,6 +7,7 @@ import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,16 +27,22 @@ public class PostController {
         this.postService = postService;
     }
 
-    @RequestMapping("/")
-    public String list(Model model){
-        model.addAttribute("post", postService.getLatestPost());
-        return "blog/index";
+    @RequestMapping("/list")
+    public String listPosts(Model model){
+        model.addAttribute("posts", postService.list());
+        return "post/list";
+    }
+
+    @RequestMapping("/view/{slug}")
+    public String view(@PathVariable(value="slug") String slug, Model model){
+        model.addAttribute("post", postService.getBySlug(slug));
+        return "post/view";
     }
 
     // Handling Specific Exceptions
     @RequestMapping("/get/{slug}")
     public String getPost(@PathVariable(value = "slug") String slug) throws PostNotFoundException {
-        Post post = postService.findOne(slug);
+        Post post = postService.getBySlug(slug);
         if (post == null) throw new PostNotFoundException("We couldn't find the post with slug: " + slug);
         return "blog/post";
     }

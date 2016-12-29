@@ -5,10 +5,7 @@ import com.codeonblue.repository.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Service
 public class PostServiceBean implements PostService{
@@ -16,17 +13,19 @@ public class PostServiceBean implements PostService{
     private final PostRepository postRepository;
 
     @Autowired
-    public PostServiceBean(PostRepository postRepository) {
+    public PostServiceBean(PostRepository postRepository){
         this.postRepository = postRepository;
     }
 
-    @Override
-    public Post getLatestPost() {
+    public Post getLatestPost(){
         return postRepository.findFirstByOrderByPostedOnDesc();
     }
 
-    @Override
-    public Post findOne(String slug) {
+    public List<Post> list() {
+        return postRepository.findAllByOrderByPostedOnDesc();
+    }
+
+    public Post getBySlug(String slug) {
         return postRepository.findBySlug(slug);
     }
 

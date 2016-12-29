@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="layout/main">
+<head>
+    <title th:text="|Current profile is ${environment}|">View Post</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+    <article>
+        <header>
+            <h2 th:text="|Current profile is ${environment}|">title</h2>
+        </header>
+        <section th:text="|Current database url is ${datasource.server}|">
+            body
+        </section>
+        <hr/>
+    </article>
+
+</div>
+
+</body>
+</html>

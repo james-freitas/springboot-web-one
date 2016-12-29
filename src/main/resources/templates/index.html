@@ -1,48 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="common/header :: common-header"/>
+<html lang="en"
+      layout:decorator="layout/main">
+<head>
+    <title>The Real Dan Vega - Home Page</title>
+</head>
 <body>
-<!-- Login Section -->
-<img class="img-responsive" src="/images/banner.jpg" alt="banner"/>
-<div class="container">
-    <div class="row ">
-        <div class="main-center ">
-            <div class="bg-danger" th:if="${param.error}">
-                Invalid username and secret.
-            </div>
-            <div class="bg-danger" th:if="${param.logout}">
-                You have been logged out.
-            </div>
-            <form class="form-signin" th:action="@{/index}" method="post">
-                <h2 class="form-signin-heading">Please sign in</h2>
-                <div class="form-group">
-                    <label for="username" class="sr-only">Username</label>
-                    <input type="text" roleId="username" class="form-control" placeholder="Username" name="username"
-                           id="username"
-                           required="required" autofocus="autofocus"/>
-                </div>
-                <div class="form-group">
-                    <label for="password" class="sr-only">Password</label>
-                    <input type="password" roleId="inputPassword" class="form-control" placeholder="Password"
-                           id="password"
-                           name="password" required="required"/>
-                </div>
-                <div class="form-group">
-                    <input type="checkbox" name="remember-me" id="remember-me"/> &nbsp; Remember me
-                </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            </form>
 
-            <hr />
+<div layout:fragment="content">
 
-            <div class="form-group ">
-                <a type="submit" class="btn btn-info btn-lg btn-block login-button" th:href="@{/signup}">Sign up!</a>
-            </div>
+    <h2>About Me</h2>
+    <div class="row">
+        <div class="col-md-12">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nisl libero, molestie vitae orci nec, luctus feugiat lorem. Maecenas eu massa non neque blandit tempor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse id consectetur enim, et cursus nisl. Ut volutpat tempor accumsan. Aliquam et libero id nunc consectetur consequat at eu nibh. Nam ut justo in sapien fermentum facilisis.</p>
+            <p>Nullam sodales neque fringilla molestie facilisis. Morbi nisl neque, malesuada convallis felis vitae, pharetra maximus lorem. Fusce tincidunt sapien pretium leo scelerisque, eget egestas nisi dapibus. Sed ut magna egestas, condimentum ex vel, tempor justo. Duis ut magna et orci tincidunt vestibulum. Suspendisse sed enim nec mi convallis aliquam. Sed id urna ultricies dolor dictum vulputate. Nulla porta auctor sagittis.</p>
         </div>
     </div>
-</div>
 
-<div th:replace="common/header :: body-bottom-scripts"/>
+    <article>
+        <header>
+            <h2 th:text="${post.title}">title</h2>
+            <p th:text="${#temporals.format(post.postedOn, 'dd/MMM/yyyy HH:mm')}">postedOn</p>
+        </header>
+        <section th:utext="${post.teaser}">
+            teaser
+        </section>
+        <footer>
+            <a th:href="|@{/posts/view/}${post.slug}|">Read More</a>
+            <address>
+                Posted By <a th:href="|mailto:${post.author.email}|"> <span th:text="|${post.author.firstName} ${post.author.lastName}|">author</span></a>
+            </address>
+        </footer>
+        <hr/>
+    </article>
+
+</div>
 
 </body>
 </html>

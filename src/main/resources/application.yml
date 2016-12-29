@@ -15,3 +15,13 @@ spring:
     console:
       enabled: true
       path: /console
+  profiles:
+    active: development
+
+environments:
+  development:
+    url: http://db.developer.com
+    name: Developer Database
+  production:
+    url: http://db.production.com
+    name: Production Database
