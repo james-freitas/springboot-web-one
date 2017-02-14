@@ -1,9 +1,11 @@
 package com.codeonblue.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 public class Post {
@@ -24,6 +26,28 @@ public class Post {
     @CreatedDate
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime postedOn;
+
+
+    @ElementCollection
+    private List<String> keywords;
+
+    public List<String> getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(List<String> keywords) {
+        this.keywords = keywords;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    private Boolean active;
 
     @ManyToOne
     private Author author;
@@ -65,6 +89,7 @@ public class Post {
         return postedOn;
     }
 
+   // @JsonSerialize(using = JsonDateSerializer.class)
     public void setPostedOn(LocalDateTime postedOn) {
         this.postedOn = postedOn;
     }
