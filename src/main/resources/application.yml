@@ -25,3 +25,7 @@ environments:
   production:
     url: http://db.production.com
     name: Production Database
+security:
+  user:
+    name: user
+    password: user
